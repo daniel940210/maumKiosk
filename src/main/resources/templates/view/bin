@@ -1,0 +1,279 @@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- icon (Chrome & Opera) -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/image/ico_maumAI_60x60.ico}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" href="/css/mvp.css?v=202006081770">
+
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/recorder.js}"></script>
+    <script type="text/javascript" th:src="@{/js/recorderWorker.js}"></script>
+
+    <script type="text/javascript" src="/js/messages.js"></script>
+    <script type="text/javascript" src="/js/mvp___utils.js"></script>
+    <script type="text/javascript" th:src="@{/js/mvp___init.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mvp___popup.js}"></script>
+    <script type="text/javascript" src="/js/mvp___popup___audio.js"></script>
+    <script type="text/javascript" src="/js/mvp___popup___camera.js"></script>
+    <script type="text/javascript" src="/js/mvp___popup___upload.js"></script>
+    <script type="text/javascript" src="/js/mvp___popup___video.js"></script>
+    <script type="text/javascript" src="/js/mvp___popup___faceRecog.js"></script>
+    <script type="text/javascript" src="/js/mvp___engine.js?v=202006261307"></script>
+    <script type="text/javascript" th:src="@{/js/mvp___exec.js}"></script>
+    <script type="text/javascript" src="/js/mvp___exec___apis.js?v=202006261307"></script>
+
+<!--======================================== INPUT POPUP START =========================================
+
+ #text_input_box
+<div class="pop_simple mvp_pop api_start_input" id="text_input_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2><span th:text="#{text_box.header.title}"></span><em class="fas fa-times ico_close"></em></h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+                    <textarea id="api_input" class="api_input_box"
+                              th:placeholder="#{text_input.popup.title}"></textarea>
+        </div>
+         //.pop_bd
+        <div class="btn">
+            <button type="button" class="blue_btn" th:text="#{button.input_complete}"></button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ //.pop_simple
+
+ #audio_input_box
+<div class="pop_simple mvp_pop api_start_input" id="audio_input_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2><span th:text="#{audio_box.header.title}"></span><em class="fas fa-times ico_close"></em></h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+            <div class="record_Box">
+                <div class="holeBox">
+                    <div class="hole">
+                        <em></em><em></em><em></em><em></em><em></em>
+                    </div>
+                </div>
+                <button class="demoRecord"><span><em class="fas fa-microphone"></em><strong
+                        th:text="#{button.record}"></strong></span></button>
+                <div class="loading_box">
+                    <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="144px" height="18px"
+                         viewBox="0 0 128 16" xml:space="preserve"><path fill="#c9c3ec" fill-opacity="0.42" d="M6.4,4.8A3.2,3.2,0,1,1,3.2,8,3.2,3.2,0,0,1,6.4,4.8Zm12.8,0A3.2,3.2,0,1,1,16,8,3.2,3.2,0,0,1,19.2,4.8ZM32,4.8A3.2,3.2,0,1,1,28.8,8,3.2,3.2,0,0,1,32,4.8Zm12.8,0A3.2,3.2,0,1,1,41.6,8,3.2,3.2,0,0,1,44.8,4.8Zm12.8,0A3.2,3.2,0,1,1,54.4,8,3.2,3.2,0,0,1,57.6,4.8Zm12.8,0A3.2,3.2,0,1,1,67.2,8,3.2,3.2,0,0,1,70.4,4.8Zm12.8,0A3.2,3.2,0,1,1,80,8,3.2,3.2,0,0,1,83.2,4.8ZM96,4.8A3.2,3.2,0,1,1,92.8,8,3.2,3.2,0,0,1,96,4.8Zm12.8,0A3.2,3.2,0,1,1,105.6,8,3.2,3.2,0,0,1,108.8,4.8Zm12.8,0A3.2,3.2,0,1,1,118.4,8,3.2,3.2,0,0,1,121.6,4.8Z"/>
+                        <g><path fill="#7e71d1" fill-opacity="1" d="M-42.7,3.84A4.16,4.16,0,0,1-38.54,8a4.16,4.16,0,0,1-4.16,4.16A4.16,4.16,0,0,1-46.86,8,4.16,4.16,0,0,1-42.7,3.84Zm12.8-.64A4.8,4.8,0,0,1-25.1,8a4.8,4.8,0,0,1-4.8,4.8A4.8,4.8,0,0,1-34.7,8,4.8,4.8,0,0,1-29.9,3.2Zm12.8-.64A5.44,5.44,0,0,1-11.66,8a5.44,5.44,0,0,1-5.44,5.44A5.44,5.44,0,0,1-22.54,8,5.44,5.44,0,0,1-17.1,2.56Z"/>
+                            <animatetransform attributeName="transform" type="translate"
+                                              values="23 0;36 0;49 0;62 0;74.5 0;87.5 0;100 0;113 0;125.5 0;138.5 0;151.5 0;164.5 0;178 0"
+                                              calcMode="discrete" dur="1820ms"
+                                              repeatCount="indefinite"/></g></svg>
+                </div>
+            </div>
+            <p class="record_desc" th:inline="text">[[#{audio_box.body.desc1}]]<br>[[#{audio_box.body.desc2}]]
+            </p>
+            <div class="upload_box">
+                <label for="audioInputFile" class="demolabel" th:text="#{file_upload}"></label>
+                <input type="file" id="audioInputFile" class="demoFile" accept=".wav, .mp3, .pcm">
+            </div>
+            <div class="play_Box">
+                <button class="play_btn"><span><em class="fas fa-play-circle"></em><strong
+                        th:text="#{audio_box.body.play}"></strong></span></button>
+            </div>
+        </div>
+         //.pop_bd
+        <div class="btn" id="Audio_record_resultBtn">
+            <button type="button" class="reset_btn" id="Button_AudioRecord_Reset"
+                    th:text="#{audio_box.button.reset}"></button>
+            <button type="button" class="blue_btn" id="Button_AudioRecord_Complete"
+                    th:text="#{button.input_complete}"></button>
+        </div>
+        <div class="btn" id="Audio_upload_resultBtn">
+            <button type="button" class="reset_btn reset_upload_btn" value="audio"
+                    th:text="#{button.reupload}"></button>
+            <button type="button" class="blue_btn file_confirm_btn" value="audio"
+                    th:text="#{button.input_complete}"></button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ //.pop_simple
+
+ #video_input_box
+<div class="pop_simple mvp_pop api_start_input" id="video_input_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2><span th:text="#{video_box.header.title}"></span><em class="fas fa-times ico_close"></em></h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+            <div class="video_box">
+                <div class="border_line"><em></em><em></em><em></em><em></em></div>
+                <video id="video" class="video_area" autoplay></video>
+                <canvas id="snapshotCanvas" class="canvas_area" width=400 height=300></canvas>
+                <img id="uploadedImg" width=400 height=300>
+                <button type="button" class="video_start"><em class="fas fa-camera"></em> <span
+                        th:text="#{button.capture}"></span></button>
+            </div>
+            <p class="video_desc" th:text="#{video_box.body.desc}"></p>
+            <div class="upload_box">
+                <label for="imageInputFile" class="demolabel" th:text="#{file_upload}"></label>
+                <input type="file" id="imageInputFile" class="demoFile" accept=".png, .jpg">
+            </div>
+        </div>
+         //.pop_bd
+        <div class="btn" id="Image_capture_resultBtn">
+            <button type="button" class="reset_btn" id="reCapture"
+                    th:text="#{video_box.button.recapture}"></button>
+            <button type="button" class="blue_btn" id="imgConfirm" th:text="#{button.input_complete}"></button>
+        </div>
+        <div class="btn" id="Image_upload_resultBtn">
+            <button type="button" class="reset_btn reset_upload_btn" value="image"
+                    th:text="#{button.reupload}"></button>
+            <button type="button" class="blue_btn file_confirm_btn" value="image"
+                    th:text="#{button.input_complete}"></button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ //.pop_simple
+
+ #videoUpload_input_box
+<div class="pop_simple mvp_pop api_start_input" id="videoUpload_input_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2><span th:text="#{video_upload_box.header.title}"></span><em class="fas fa-times ico_close"></em>
+            </h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+            <div class="video_box">
+                <div class="border_line"><em></em><em></em><em></em><em></em></div>
+                <video id="videoUpload_video" class="video_area" autoplay controls></video>
+            </div>
+            <div class="upload_box">
+                <label for="videoInputFile" class="demolabel" th:text="#{file_upload}"></label>
+                <input type="file" id="videoInputFile" class="demoFile" accept=".mp4, .avi">
+            </div>
+            <p class="video_desc" th:text="#{video_upload_box.body.desc}"></p>
+        </div>
+         //.pop_bd
+        <div class="btn" id="videoUpload_resultBtn">
+            <button type="button" class="reset_btn reset_upload_btn" value="video" th:text="#{button.reupload}">
+                업로드 다시하기
+            </button>
+            <button type="button" class="blue_btn file_confirm_btn" value="video" id="videoConfirm"
+                    th:text="#{button.input_complete}">입력 완료
+            </button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ // #videoUpload_input_box
+
+ #fr_input_box
+<div class="pop_simple mvp_pop api_start_input" id="face_input_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2 th:inline="text">[[#{fr_box.header.title}]]<em class="fas fa-times ico_close"></em></h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+            <ul class="input_box">
+                <li id="fr_image">
+                    <h5><span th:text="#{fr_box.body.title1}">얼굴 이미지</span></h5>
+                    <div class="fr_box">
+                        <button type="button" class="record_btn" value="" th:text="#{button.capture}">촬영
+                        </button>
+                        <div class="upload_box">
+                            <label for="frInputFile" class="demolabel" th:text="#{file_upload}">파일 업로드</label>
+                            <input type="file" id="frInputFile" class="demoFile" accept=".png, .jpg">
+                        </div>
+                        <button type="button" class="face_check_btn" value="" th:text="#{fr_box.body.check}">
+                            보기
+                        </button>
+                        <button type="button" class="face_delete" th:text="#{button.delete}">삭제</button>
+                    </div>
+                </li>
+                <li id="fr_text">
+                    <h5><span th:text="#{fr_box.body.title2}">얼굴 아이디</span></h5>
+                    <input type="text" id="frInputText" class="text_input"/>
+                </li>
+            </ul>
+
+            <div class="recording">
+                <div class="video_box">
+                    <div class="border_line"><em></em><em></em><em></em><em></em></div>
+                    <video id="fr_video" class="video_area" autoplay></video>
+                    <canvas id="fr_snapshotCanvas" class="canvas_area" style="display: none" width=400
+                            height=300></canvas>
+                    <button type="button" class="video_start"><em class="fas fa-camera"></em> <span
+                            th:text="#{button.capture}">촬영</span></button>
+                </div>
+                <p class="record_desc" th:text="#{fr_box.body.desc}">촬영 버튼을 눌러 사진을 촬영해 주세요.</p>
+            </div>
+
+            <div class="file_check_box">
+                <img id="fr_uploadedImg">
+            </div>
+        </div>
+         //.pop_bd
+        <div class="btn">
+            <button id="fr_input_complete" type="button" class="face_btn" th:text="#{button.input_complete}">
+                입력완료
+            </button>
+            <button id="fr_return" type="button" class="face_btn" th:text="#{fr_box.button.return}">돌아가기
+            </button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ //.fr_input_box
+
+======================================== OUTPUT POPUP START =========================================
+
+ #ft_output_box
+<div class="pop_simple mvp_pop api_start_output" id="ft_output_box">
+    <div class="mvp_pop_bg"></div>
+     .popWrap
+    <div class="popWrap">
+        <div class="pop_hd">
+            <h2 th:inline="text">[[#{ft_outbox.header.title}]]<em class="fas fa-times ico_close"></em></h2>
+        </div>
+         .pop_bd
+        <div class="pop_bd">
+            <div class="output_content">
+                <ul class="scenebox">
+
+                </ul>
+            </div>
+        </div>
+         //.pop_bd
+        <div class="btn">
+            <button id="ft_return" type="button" th:text="#{button.close}">닫기</button>
+        </div>
+    </div>
+     //.popWrap
+</div>
+ //.ft_output_box -->

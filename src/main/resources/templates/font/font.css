@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* MINDsLab. UX/UI Team */
+
+/* Noto */
+@font-face {
+    font-family:'Noto Sans KR';
+    font-style:normal;
+    font-weight:100;
+    src:url(../font/NotoSansKR-Light.otf) format('truetype'),
+    url(../font/NotoSansKR-Light.woff) format('woff'),
+    url(../font/NotoSansKR-Light.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Noto Sans KR';
+    font-style:normal;
+    font-weight:400;
+    src:url(../font/NotoSansKR-Regular.otf) format('truetype'),
+    url(../font/NotoSansKR-Regular.woff) format('woff'),
+    url(../font/NotoSansKR-Regular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Noto Sans KR';
+    font-style:normal;
+    font-weight:500;
+    src:url(../font/NotoSansKR-Medium.otf) format('truetype'),
+    url(../font/NotoSansKR-Medium.woff) format('woff'),
+    url(../font/NotoSansKR-Medium.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Noto Sans KR';
+    font-style:normal;
+    font-weight:700;
+    src:url(../font/NotoSansKR-Bold.otf) format('truetype'),
+    url(../font/NotoSansKR-Bold.woff) format('woff'),
+    url(../font/NotoSansKR-Bold.woff2) format('woff2');
+}
+
+/* Roboto */
+@font-face {
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:100;
+    src:url(../font/Roboto-Thin.otf) format('opentype'),
+    url(../font/Roboto-Thin.woff) format('woff'),
+    url(../font/Roboto-Thin.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:300;
+    src:url(../font/Roboto-Light.otf) format('opentype'),
+    url(../font/Roboto-Light.woff) format('woff'),
+    url(../font/Roboto-Light.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:400;
+    src:url(../font/Roboto-Regular.otf) format('opentype'),
+    url(../font/Roboto-Regular.woff) format('woff'),
+    url(../font/Roboto-Regular.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:500;
+    src:url(../font/Roboto-Medium.otf) format('opentype'),
+    url(../font/Roboto-Medium.woff) format('woff'),
+    url(../font/Roboto-Medium.woff2) format('woff2');
+}
+
+@font-face {
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:700;
+    src:url(../font/Roboto-Bold.otf) format('opentype'),
+    url(../font/Roboto-Bold.woff) format('woff'),
+    url(../font/Roboto-Bold.woff2) format('woff2');
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Maum Kiosk</title>
+    <link rel="stylesheet" th:href="@{\input_style.css}" />
+</head>
+
+<body>
+
+<div id="header">
+    <div id="heading">
+        <h1>Maum Kiosk</h1>
+        <p>AI Kiosk with Face Recognition (Powered by maum.ai)</p>
+    </div>
+</div>
+
+
+
+<div id="footer">
+    <div id="date">
+        <p th:text="${#dates.format(datetime, 'E, dd MMM yyyy HH:mm z')}" class="text-muted">Page was rendered today.</p>
+    </div>
+    <div id="copyright">
+        <p>Copyright &copy; 2020 Minds Lab Inc.</p>
+    </div>
+</div>
+
+</body>
+
+</html>

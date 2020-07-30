@@ -1,0 +1,46 @@
+spring:
+    profiles: local
+    datasource:
+        url: jdbc:sqlserver://SWHANG-MINDSLAB\\SQLEXPRESS:1433;databaseName=maumKiosk
+        username: maumKiosk
+        password: 1234
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+server:
+    port: 6080
+    servlet:
+        session:
+            tracking-modes: cookie
+            cookie:
+                name: AIBUILDER_JSESSIONID
+#    ssl:
+#        enabled: true
+#        key-store: "c:/Project/ssl/minds/maum.ai.jks"
+#        key-store-type: "JKS"
+#        key-store-password: "msl1234~"
+
+
+
+upload:
+    dir: c:/upload
+
+#maum:
+#    url: http://localhost:8080
+#
+url:
+    maum-ai: http://localhost:8080
+    hq: https://hq-dev.maum.ai:10080
+
+
+sso:
+    client-id: mvp-maker.local
+    scope: read_profile
+    callback: http://127.0.0.1:6080/security/oauth/callback
+
+
+# ======================================================================================================================
+# 시간 관련 설정
+# ======================================================================================================================
+
+time:
+    db-diff-time: 0

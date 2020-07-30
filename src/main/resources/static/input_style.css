@@ -1,0 +1,126 @@
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
+html {
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+}
+body {
+    background-image: url(bg.jpg);
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+.button {
+    border-bottom: 6px inset rgba(0,0,0,.5);
+    border-left: 6px inset rgba(0,0,0,.5);
+    border-right: 6px inset rgba(255,255,255,.5);
+    border-top: 6px inset rgba(255,255,255,.5);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    height: 100px;
+    width: 200px;
+    background-color: #A9A9A9;
+    text-align: center;
+    text-decoration-color: black;
+    text-transform: uppercase;
+}
+
+#header {
+    height: 180px;
+    background-color: #001B5E;
+    color: white;
+    text-align: center;
+}
+    #heading{
+        padding:2px;
+    }
+
+#content {
+    height: 730px;
+    margin-top: 20px;
+}
+    #container {
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right:auto;
+        height: 500px;
+        width: 500px;
+        display: block;
+        border-bottom: 6px inset #001B5E;
+        border-left: 6px inset #89AAFC;
+        border-right: 6px inset #001B5E;
+        border-top: 6px inset #89AAFC;
+        background-color: white;
+    }
+        #img {
+            padding:0;
+            margin-left: 0;
+            margin-right: auto;
+        }
+    #button_row {
+        height:130px;
+        display: block;
+        column-count: 3;
+    }
+        #choose {
+            margin-left:65%;
+        }
+            #choose_text{
+                padding:10px;
+            }
+        #conv {
+            margin-bottom: 65px;
+            border-bottom: 6px inset rgba(0,0,0,.5);
+            border-left: 6px inset rgba(0,0,0,.5);
+            border-right: 6px inset rgba(255,255,255,.5);
+            border-top: 6px inset rgba(255,255,255,.5);
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 600px;
+            height: 100px;
+            text-align:center;
+            background-color: white;
+        }
+            #conv_text {
+                position:absolute;
+                width:580px;
+                height:25px;
+                text-align:center;
+                bottom:19%;
+            }
+        #products {
+        }
+            #products_text {
+                padding: 10px;
+            }
+    #audio_player{
+        text-align:center;
+    }
+#footer {
+    column-count: 2;
+    background-color: #001B5E;
+    color: white;
+    height: 60px;
+    text-decoration-color: white;
+    font-size: smaller;
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+}
+    #date{
+        margin-top:75px;
+        position:absolute;
+        top:92%;
+        left:40px;
+        bottom:0;
+    }
+    #copyright{
+        top:92%;
+        margin-top:75px;
+        position:absolute;
+        right:40px;
+        bottom:0;
+    }

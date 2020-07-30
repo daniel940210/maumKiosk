@@ -1,0 +1,21 @@
+spring:
+    profiles:
+        # 스프링부트 실행 시, active 설정을 하지 않으면 디폴트로 local로 설정됨.
+        active: local
+
+    servlet:
+        multipart:
+            max-file-size: 50MB
+            max-request-size: 50MB
+---
+
+---
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+    configuration:
+        map-underscore-to-camel-case: true      # mapping: my_id -> myId
+
+api:
+    id: minds-api-performance-test
+    key: 4SBRGrq9
