@@ -10,15 +10,15 @@ import java.util.Date;
 
 @Slf4j
 @Controller
-@RequestMapping("/input")
-public class InputController {
+@RequestMapping("/")
+public class WelcomeController {
     @RequestMapping("/")
     public String footerInfo (Model model) {
         model.addAttribute("datetime", new Date());
-        return "view/input";
+        return "view/welcome";
     }
     @RequestMapping("/redirect")
     public RedirectView redirectView () {
-        return new RedirectView("/result/");
+        return new RedirectView("/input/");
     }
 }

@@ -1,0 +1,39 @@
+    @RequestMapping("/")
+    public String input (Model model) {
+        Connection testConnection = getConnectionToDB();
+        String greeting = "";
+        if(testConnection == null) {
+            greeting = "No Connection!";
+        }
+        else {
+            greeting = GetGreeting(testConnection);
+        }
+        model.addAttribute("datetime", new Date());
+        model.addAttribute("Greeting", greeting);
+        return "view/input";
+    }
+    public String GetGreeting(Connection conn) {
+        Statement stmt = null;
+        String query = "SELECT TOP 1 * FROM GREETINGS";
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            return rs.getString("Greeting");
+        } catch (SQLException e) {
+            return "";
+        }
+    }
+    public Connection getConnectionToDB() {
+        try {
+            Connection conn = DriverManager.getConnection(
+                "jdbc:sqlserver://SWHANG-MINDSLAB\\SQLEXPRESS",
+                "maumKiosk",
+                "1234"
+            );
+            return conn;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
