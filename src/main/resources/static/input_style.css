@@ -107,10 +107,10 @@ a {
                 padding:10px;
             }
         #conv {
-            border-bottom: 6px inset #001B5E;
-            border-left: 6px inset #89AAFC;
-            border-right: 6px inset #001B5E;
-            border-top: 6px inset #89AAFC;
+            border-bottom: 6px inset grey;
+            border-left: 6px inset grey;
+            border-right: 6px inset grey;
+            border-top: 6px inset grey;
             margin: 20px auto 65px;
             width: 600px;
             height: 100px;

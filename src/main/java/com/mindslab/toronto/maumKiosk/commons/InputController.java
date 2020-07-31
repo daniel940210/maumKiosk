@@ -3,7 +3,10 @@ package com.mindslab.toronto.maumKiosk.commons;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Date;
@@ -21,8 +24,21 @@ public class InputController {
     public RedirectView toWelcome () {
         return new RedirectView("/");
     }
+/*    @GetMapping("/")
+    public String inputForm(Model model) {
+        model.addAttribute("vidInput", new VidInput());
+        return "view/input";
+    }*/
+/*    @PostMapping("/result/")
+    public String toResult (@ModelAttribute VidInput vidInput, Model model) {
+        model.addAttribute("vidInput", vidInput);
+        return "view/result";
+    }*/
+    
     @RequestMapping("/redirectF")
-    public RedirectView toResult () {
-        return new RedirectView("/result/");
+    public ModelAndView toResult () {
+        ModelAndView modelAndView = new ModelAndView("redirect:/result/");
+        modelAndView.addObject("vidInput","hello");
+        return modelAndView;
     }
 }

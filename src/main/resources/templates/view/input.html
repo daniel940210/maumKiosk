@@ -118,8 +118,7 @@
                         mediaRecorder.onstop = (ev)=>{
                             let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
                             chunks = [];
-                            let videoURL = window.URL.createObjectURL(blob);
-                            vidSave.src = videoURL;
+                            vidSave.src = window.URL.createObjectURL(blob);
                         }
                     })
                     .catch(function(err) {
@@ -154,6 +153,10 @@
                 <div id="myBar">Loading...</div>
             </div>
         </div>
+<!--        <form action="#" th:action="@{/result/}" th:object="${vidInput}" method="post">
+            <p>Id: <input type="text" key="vid2" th:field="*{content}" /></p>
+            <p><input type="submit" value="Submit" /></p>
+        </form>-->
         <div class="button" id="products">
             <div id="products_text">
                 <a class="selected" th:href="redirectF">Proceed to Result</a>
@@ -161,8 +164,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div id="footer">
     <div id="date">
