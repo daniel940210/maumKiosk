@@ -12,21 +12,30 @@
 
 <div id="header">
     <div id="heading">
-        <h1>Maum Kiosk</h1>
-        <p>AI Kiosk with Face Recognition (Powered by maum.ai)</p>
+        <p>Maum Kiosk (Powered by maum.ai)</p>
     </div>
 </div>
 
 <div id="content">
     <div id="container">
         <div id="img">
-            <img th:src="landing.png" width="500" alt="landing"/>
+            <img th:src="@{/maum.ai_web.png}" width="1075" height="605" alt="landing"/>
         </div>
     </div>
     <div id="button_row">
         <div class="button" id="choose">
             <div id="choose_text">
-                <a class="selected" th:href="redirect">Begin Registration</a>
+                <a class="selected" href="http://maum.ai/serviceLanding/enCloudApiMain">Cloud API by maum.ai</a>
+            </div>
+        </div>
+        <div id="conv">
+            <div id="conv_text">
+                <a>Start your sign-in.</a>
+            </div>
+        </div>
+        <div class="button" id="products">
+            <div id="products_text">
+                <a class="selected" th:href="redirect">Proceed to Input</a>
             </div>
         </div>
     </div>

@@ -17,8 +17,12 @@ public class InputController {
         model.addAttribute("datetime", new Date());
         return "view/input";
     }
-    @RequestMapping("/redirect")
-    public RedirectView redirectView () {
+    @RequestMapping("/redirectB")
+    public RedirectView toWelcome () {
+        return new RedirectView("/");
+    }
+    @RequestMapping("/redirectF")
+    public RedirectView toResult () {
         return new RedirectView("/result/");
     }
 }

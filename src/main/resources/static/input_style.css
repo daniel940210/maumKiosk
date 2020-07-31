@@ -1,52 +1,88 @@
-@import url(https://fonts.googleapis.com/css?family=VT323);
+/*@import url(https://fonts.googleapis.com/css?family=VT323);*/
 
 html {
-    font-family: 'VT323', monospace;
-    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight:bold;
 }
 body {
-    background-image: url(bg.jpg);
+    background-image: url(landing.png);
+    background-repeat: no-repeat;
+    background-size: 1920px auto;
 }
 a {
     text-decoration: none;
     color: white;
 }
 .button {
-    border-bottom: 6px inset rgba(0,0,0,.5);
-    border-left: 6px inset rgba(0,0,0,.5);
-    border-right: 6px inset rgba(255,255,255,.5);
-    border-top: 6px inset rgba(255,255,255,.5);
+    border-bottom: 6px inset #001B5E;
+    border-left: 6px inset #89AAFC;
+    border-right: 6px inset #001B5E;
+    border-top: 6px inset #89AAFC;
     cursor: pointer;
     display: inline-block;
     font-size: 1.5rem;
     height: 100px;
     width: 200px;
-    background-color: #A9A9A9;
+    background-color: #89AAFC;
     text-align: center;
     text-decoration-color: black;
     text-transform: uppercase;
 }
 
+.buttonSmall {
+    border-bottom: 6px inset #001B5E;
+    border-left: 6px inset #89AAFC;
+    border-right: 6px inset #001B5E;
+    border-top: 6px inset #89AAFC;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    height: 48px;
+    width: 588px;
+    background-color: #89AAFC;
+    text-align: center;
+    text-decoration-color: black;
+    text-transform: uppercase;
+    padding-top:10px;
+}
+
 #header {
-    height: 180px;
+    height: 75px;
     background-color: #001B5E;
     color: white;
     text-align: center;
 }
     #heading{
         padding:2px;
+        font-size: 2rem;
+        position: relative;
+        top: -40%;
     }
 
+#myProgress {
+    width: 100%;
+    background-color: white;
+}
+
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: #001B5E;
+    text-align: center;
+    color: white;
+}
+
 #content {
-    height: 730px;
+    height: 767px;
     margin-top: 20px;
 }
     #container {
         margin-bottom: 20px;
         margin-left: auto;
         margin-right:auto;
-        height: 500px;
-        width: 500px;
+        height: 605px;
+        width: 1075px;
         display: block;
         border-bottom: 6px inset #001B5E;
         border-left: 6px inset #89AAFC;
@@ -71,39 +107,35 @@ a {
                 padding:10px;
             }
         #conv {
-            margin-bottom: 65px;
-            border-bottom: 6px inset rgba(0,0,0,.5);
-            border-left: 6px inset rgba(0,0,0,.5);
-            border-right: 6px inset rgba(255,255,255,.5);
-            border-top: 6px inset rgba(255,255,255,.5);
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
+            border-bottom: 6px inset #001B5E;
+            border-left: 6px inset #89AAFC;
+            border-right: 6px inset #001B5E;
+            border-top: 6px inset #89AAFC;
+            margin: 20px auto 65px;
             width: 600px;
             height: 100px;
             text-align:center;
-            background-color: white;
+            background-color:#89AAFC;
         }
             #conv_text {
                 position:absolute;
-                width:580px;
+                width:600px;
                 height:25px;
                 text-align:center;
-                bottom:19%;
+                bottom:14.5%;
+                font-size:1.5rem;
             }
         #products {
+
         }
             #products_text {
                 padding: 10px;
             }
-    #audio_player{
-        text-align:center;
-    }
 #footer {
     column-count: 2;
     background-color: #001B5E;
     color: white;
-    height: 60px;
+    height: 58px;
     text-decoration-color: white;
     font-size: smaller;
     clear: both;
@@ -112,15 +144,17 @@ a {
 }
     #date{
         margin-top:75px;
-        position:absolute;
-        top:92%;
+        position: absolute;
+        top:85%;
         left:40px;
         bottom:0;
+        display:inline-block;
     }
     #copyright{
-        top:92%;
+        top:85%;
         margin-top:75px;
         position:absolute;
         right:40px;
         bottom:0;
+        display:inline-block;
     }
