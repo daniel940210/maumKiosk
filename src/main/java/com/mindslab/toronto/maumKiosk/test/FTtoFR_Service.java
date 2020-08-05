@@ -10,7 +10,7 @@ import java.util.Base64;
 
 @Slf4j
 @Service
-public class FTtoFR {
+public class FTtoFR_Service {
     public MultipartFile ftResultToFrInput (String jsonOutput) {
         JSONObject jo = new JSONObject(jsonOutput);
         byte[] decoded = Base64.getDecoder().decode(jo.getString("frame_1"));

@@ -7,8 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 @Slf4j
@@ -35,10 +38,15 @@ public class InputController {
         return "view/result";
     }*/
     
-    @RequestMapping("/redirectF")
-    public ModelAndView toResult () {
-        ModelAndView modelAndView = new ModelAndView("redirect:/result/");
-        modelAndView.addObject("vidInput","hello");
-        return modelAndView;
+/*    @RequestMapping("/redirectF")
+    public RedirectView toResult () {
+        return new RedirectView("/result/");
+    }*/
+    
+    @RequestMapping(value="/save", method=RequestMethod.POST)
+    public String redirect (@ModelAttribute("vidBase64") final String video, RedirectAttributes redirectAttr) {
+        redirectAttr.addFlashAttribute("video", video);
+        /*System.out.println(video);*/
+        return "redirect:/result/";
     }
 }

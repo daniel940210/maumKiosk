@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "api.id",
+      "type": "java.lang.String",
+      "description": "Description for api.id."
+    },
+    {
+      "name": "api.key",
+      "type": "java.lang.String",
+      "description": "Description for api.key."
+    },
+    {
+      "name": "mybatis.configuration.map-underscore-to-camel-case",
+      "type": "java.lang.String",
+      "description": "Description for mybatis.configuration.map-underscore-to-camel-case."
+    },
+    {
+      "name": "mybatis.mapper-locations",
+      "type": "java.lang.String",
+      "description": "Description for mybatis.mapper-locations."
+    }
+  ] }

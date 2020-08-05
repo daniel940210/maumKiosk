@@ -6,6 +6,19 @@
     <meta charset="UTF-8"/>
     <title>Maum Kiosk</title>
     <link rel="stylesheet" th:href="@{/input_style.css}" />
+    <style>
+        input[target=_button] {
+            color: white;
+            padding: 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +32,9 @@
 <div id="content">
     <div id="container">
         <main>
-            <video width="1075" height="605"></video>
+            <div id="displayBox">
+                <video width="1075" height="605"></video>
+            </div>
             <!--    <video id="vid2" autoplay></video>-->
             <!--        <button id="btnStop">STOP RECORDING</button></p>-->
             <script>
@@ -80,6 +95,7 @@
                         let start = document.getElementById('btnStart');
                         // let stop = document.getElementById('btnStop');
                         let vidSave = document.getElementById('vid2');
+                        let vidBase64 = document.getElementById('vidBase64');
                         let mediaRecorder = new MediaRecorder(mediaStreamObj);
                         let chunks = [];
 
@@ -92,7 +108,7 @@
                                     i = 1;
                                     let elem = document.getElementById("myBar");
                                     let width = 1;
-                                    let id = setInterval(frame, 10);
+                                    let id = setInterval(frame, 50);
                                     function frame() {
                                         if (width >= 100) {
                                             clearInterval(id);
@@ -105,7 +121,7 @@
                                 }
                             }
                             move();
-                            setTimeout(function(){mediaRecorder.stop();},2000);
+                            setTimeout(function(){mediaRecorder.stop();},5000);
                             console.log(mediaRecorder.state);
                         })
                         // stop.addEventListener('click', (ev)=>{
@@ -118,7 +134,33 @@
                         mediaRecorder.onstop = (ev)=>{
                             let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
                             chunks = [];
-                            vidSave.src = window.URL.createObjectURL(blob);
+                            // vidSave.src = window.URL.createObjectURL(blob);
+                            let reader = new window.FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = function () {
+                                vidBase64.value = reader.result;
+                            }
+                            // $(document).ready(function() {
+                            //     $('#products').click(function() {
+                            //         let fd = new FormData();
+                            //         fd.append('video', blob);
+                            //         fd.append('apiId', 'swhange91d6f0f28ab');
+                            //         fd.append('apiKey', '78ab9ae227d149539d96ed553ae448a4');
+                            //
+                            //         $.ajax({
+                            //             type: "POST",
+                            //             url: 'https://api.maum.ai/Vca/faceTracking',
+                            //             data: fd,
+                            //             contentType: "application/json; charset=utf-8",
+                            //             cache: false,
+                            //             dataType: "json",
+                            //             processData: false,
+                            //             success: function(data, textStatus, jqXHR) {
+                            //                 $('#displayBox').empty().append(data);
+                            //             }
+                            //         })
+                            //     })
+                            // })
                         }
                     })
                     .catch(function(err) {
@@ -137,6 +179,7 @@
                  TypeError - audio: false, video: false
                  *********************************/
             </script>
+
         </main>
     </div>
     <div id="button_row">
@@ -153,15 +196,22 @@
                 <div id="myBar">Loading...</div>
             </div>
         </div>
-<!--        <form action="#" th:action="@{/result/}" th:object="${vidInput}" method="post">
-            <p>Id: <input type="text" key="vid2" th:field="*{content}" /></p>
-            <p><input type="submit" value="Submit" /></p>
-        </form>-->
-        <div class="button" id="products">
+
+        <form th:action="@{/input/save}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:id="vidBase64" name="vidBase64" value="None" />
+            <input type="submit" class="button" id="products" target="_button" value="Proceed to Results" />
+           <!-- <div class="button" id="products" type="submit">
+                <div id="products_text">
+                    <a class="selected">Proceed to Result</a>
+                </div>
+            </div>-->
+        </form>
+
+<!--        <div class="button" id="products">
             <div id="products_text">
                 <a class="selected" th:href="redirectF">Proceed to Result</a>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 

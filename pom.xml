@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mindslab.toronto</groupId>
-    <artifactId>maumavatar</artifactId>
+    <artifactId>maumKiosk</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>maumavatar</name>
+    <name>maumKiosk</name>
     <description>AI Avatar Generator using maum.ai Cloud API AI Avatar Engine</description>
 
     <properties>
@@ -26,6 +26,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
