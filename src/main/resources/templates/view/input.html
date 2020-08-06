@@ -96,6 +96,7 @@
                         // let stop = document.getElementById('btnStop');
                         let vidSave = document.getElementById('vid2');
                         let vidBase64 = document.getElementById('vidBase64');
+                        let ftResult = document.getElementById('ftResult');
                         let mediaRecorder = new MediaRecorder(mediaStreamObj);
                         let chunks = [];
 
@@ -134,11 +135,32 @@
                         mediaRecorder.onstop = (ev)=>{
                             let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
                             chunks = [];
-                            // vidSave.src = window.URL.createObjectURL(blob);
                             let reader = new window.FileReader();
                             reader.readAsDataURL(blob);
                             reader.onloadend = function () {
                                 vidBase64.value = reader.result;
+                            }
+                            let fd = new FormData();
+                            // let file = new File([blob], 'recording');
+                            // let file = document.getElementById('file').files[0];
+                            fd.append('video', blob);
+                            fd.append('apiId', 'swhange91d6f0f28ab');
+                            fd.append('apiKey', '78ab9ae227d149539d96ed553ae448a4');
+
+                            let request = new XMLHttpRequest();
+                            request.open("POST", "https://api.maum.ai/Vca/faceTracking");
+                            // request.setRequestHeader("Content-Type", "multipart/form-data");
+                            request.onload = function() {
+                                if (request.status === 200) {
+                                    console.log('Success!');
+                                } else {
+                                    console.log('Failed with status code ' + request.status);
+                                }
+                            }
+                            request.send(fd);
+                            request.onloadend = function () {
+                                // ftResult.value = request.responseText;
+                                alert(this.response);
                             }
                             // $(document).ready(function() {
                             //     $('#products').click(function() {
@@ -195,10 +217,15 @@
             <div id="myProgress">
                 <div id="myBar">Loading...</div>
             </div>
+            <form enctype="multipart/form-data" method="post" name="fileinfo">
+                <input type="file" id="file" required />
+                <input type="submit" value="Submit video" />
+            </form>
         </div>
 
         <form th:action="@{/input/save}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:id="vidBase64" name="vidBase64" value="None" />
+            <input type="hidden" th:id="ftRequest" name="ftRequest" value="None" />
             <input type="submit" class="button" id="products" target="_button" value="Proceed to Results" />
            <!-- <div class="button" id="products" type="submit">
                 <div id="products_text">

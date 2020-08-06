@@ -1,4 +1,4 @@
-package com.mindslab.toronto.maumKiosk.commons;
+package com.mindslab.toronto.maumKiosk.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -44,8 +44,9 @@ public class InputController {
     }*/
     
     @RequestMapping(value="/save", method=RequestMethod.POST)
-    public String redirect (@ModelAttribute("vidBase64") final String video, RedirectAttributes redirectAttr) {
+    public String redirect (@ModelAttribute("vidBase64") final String video, @ModelAttribute("ftResult") final String ftResult, RedirectAttributes redirectAttr) {
         redirectAttr.addFlashAttribute("video", video);
+        redirectAttr.addFlashAttribute("ftResult", ftResult);
         /*System.out.println(video);*/
         return "redirect:/result/";
     }

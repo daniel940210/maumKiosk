@@ -1,4 +1,4 @@
-package com.mindslab.toronto.maumKiosk.commons;
+package com.mindslab.toronto.maumKiosk.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
