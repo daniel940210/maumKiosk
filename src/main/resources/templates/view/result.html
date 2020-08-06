@@ -20,7 +20,7 @@
     <div id="container">
         <div id="img">
 <!--            <video th:src="${videoSrc}" width="1075" height="605" autoplay loop></video>-->
-            <img th:src="${imageSrc}" width="1075" height="605" alt="Not Found"/>
+            <video th:src="${videoSrc}" width="1075" height="605"></video>
         </div>
     </div>
     <div id="button_row">
@@ -31,12 +31,12 @@
         </div>
         <div id="conv">
             <div id="conv_text">
-                <a>User Recognized</a>
+                <a>Hello, (user name goes here)!</a>
             </div>
         </div>
         <div class="button" id="products">
             <div id="products_text">
-                <a class="selected" th:href="redirectF">Start over</a>
+                <a class="selected" th:href="redirectF">Return to Welcome</a>
             </div>
         </div>
     </div>

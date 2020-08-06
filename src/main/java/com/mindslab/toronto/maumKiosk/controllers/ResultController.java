@@ -42,14 +42,13 @@ public class ResultController {
     
     @RequestMapping("/")
     public String footerInfo (@ModelAttribute("video") String videoSrc, @ModelAttribute("ftResult") String ftResultJSON, Model model) throws UnsupportedEncodingException {
-//        String[] stringBin = videoSrc.split(";;");
-//        videoSrc = stringBin[0] + ";" + stringBin[1];
-        System.out.println(ftResultJSON);
-//        System.out.println("Capture sent to Face Tracking API...");
+//        System.out.println(ftResultJSON);
+        System.out.println("Capture sent to Face Tracking API...");
+        System.out.println(videoSrc);
         model.addAttribute("videoSrc", videoSrc);
-        String imageSrc = "data:image/jpeg;base64, " + ftToImageSrc.convert(ftResultJSON);
-        System.out.println(imageSrc);
-        model.addAttribute("imageSrc", imageSrc);
+//        String imageSrc = "data:image/jpeg;base64, " + ftToImageSrc.convert(ftResultJSON);
+//        System.out.println(imageSrc);
+//        model.addAttribute("imageSrc", imageSrc);
 //        String ftResult = ftService.getApiFaceTracking(base64ToFile.convert(videoSrc));
 //        String imageSrc = fTtoImageSrc.convert(ftResult);
 //        System.out.println(imageSrc);
