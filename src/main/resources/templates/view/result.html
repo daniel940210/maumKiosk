@@ -16,11 +16,19 @@
     </div>
 </div>
 
+<!--<script>-->
+<!--    let name = document.getElementById('name');-->
+<!--    let -->
+<!--    if (name.innerText === 'New Visitor') {-->
+<!--        name.-->
+<!--    }-->
+<!--</script>-->
+
 <div id="content">
     <div id="container">
         <div id="img">
-<!--            <video th:src="${videoSrc}" width="1075" height="605" autoplay loop></video>-->
-            <video th:src="${videoSrc}" width="1075" height="605"></video>
+<!--            <video th:src="${videoSrc}" width="1075" height="605" loop autoplay></video>-->
+            <img th:src="${imageSrc}" width="1075" height="605" alt="Face recognition failed">
         </div>
     </div>
     <div id="button_row">
@@ -31,7 +39,7 @@
         </div>
         <div id="conv">
             <div id="conv_text">
-                <a>Hello, (user name goes here)!</a>
+                <a th:text="'Welcome, ' + ${name}">Welcome, new visitor.</a>
             </div>
         </div>
         <div class="button" id="products">

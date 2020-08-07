@@ -29,11 +29,14 @@ public class FaceRecog_Service {
 
     final String API_SERVER = "https://api.maum.ai";
     
-    @Value("${api.id}") String API_ID;
-    @Value("${api.key}") String API_KEY;
-    @Value("${upload.dir}") String UPLOAD_DIR;
+//    @Value("${api.id}") String API_ID;
+//    @Value("${api.key}") String API_KEY;
+//    @Value("${upload.dir}") String UPLOAD_DIR;
+    String UPLOAD_DIR = "c:/upload";
+    String API_ID = "swhange91d6f0f28ab";
+    String API_KEY = "78ab9ae227d149539d96ed553ae448a4";
     
-    String getFace(String dbId) {
+    public String getFace(String dbId) {
         try {
             String url = API_SERVER + "/insight/app/getFaceList";
             
@@ -77,7 +80,7 @@ public class FaceRecog_Service {
         }
     }
     
-    String setFace(MultipartFile file, String faceId, String dbId) {
+    public String setFace(String faceId, String dbId) {
         try {
             String url = API_SERVER + "/insight/app/setFace";
             
@@ -85,16 +88,19 @@ public class FaceRecog_Service {
             HttpPut put = new HttpPut(url);
             
             /* 이미지 데이타를 Multipart로 등록하기 위한 준비 */
-            String uploadPath = UPLOAD_DIR + "/faceRecog";
-            File varFile = new File(uploadPath);
+//            String uploadPath = UPLOAD_DIR + "/faceRecog";
+//            File varFile = new File(uploadPath);
+//
+//            if (!varFile.exists()) {
+//                varFile.mkdirs();
+//            }
+//
+//            varFile = new File((uploadPath + "/" + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\") + 1)));
+//            file.transferTo(varFile);
+//            FileBody fileBody = new FileBody(varFile);
             
-            if (!varFile.exists()) {
-                varFile.mkdirs();
-            }
-            
-            varFile = new File((uploadPath + "/" + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\") + 1)));
-            file.transferTo(varFile);
-            FileBody fileBody = new FileBody(varFile);
+            File file = new File ("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/tracked.jpg");
+            FileBody fileBody = new FileBody(file);
             
             /* Multipart 등록 */
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
@@ -116,7 +122,7 @@ public class FaceRecog_Service {
             if (responseCode == 200) {
                 String result = EntityUtils.toString(response.getEntity(), "UTF-8");
                 log.info("# EngineApiService.setFace >> succ >> result >> {}", result);
-                varFile.delete();
+//                varFile.delete();
                 return result;
             }
             /* 에러 응답 수신 */
@@ -126,7 +132,7 @@ public class FaceRecog_Service {
                 
                 System.out.println("Response Result : " + result.replace('+', ' '));
                 System.out.println("API 호출 에러 발생 : 에러코드 = " + responseCode);
-                varFile.delete();
+//                varFile.delete();
                 return "{ \"status\": \"error\" }";
             }
             
@@ -137,7 +143,7 @@ public class FaceRecog_Service {
         }
     }
     
-    String deleteFace(String faceId, String dbId) {
+    public String deleteFace(String faceId, String dbId) {
         String apiUrl = API_SERVER + "/insight/app/deleteFace";
         String lineEnd = "\r\n";
         String twoHyphens = "--";
@@ -215,7 +221,7 @@ public class FaceRecog_Service {
         }
     }
     
-    String recogFace(MultipartFile file, String dbId) {
+    public String recogFace(String dbId) {
         try {
             String url = API_SERVER + "/insight/app/recogFace";
             
@@ -223,23 +229,26 @@ public class FaceRecog_Service {
             HttpPost post = new HttpPost(url);
             
             /* 이미지 데이타를 Multipart로 등록하기 위한 준비 */
-            String uploadPath = UPLOAD_DIR+ "/faceRecog";
-            File varFile = new File(uploadPath);
-            
-            if(!varFile.exists()) {
-                varFile.mkdirs();
-            }
-            
-            varFile = new File((uploadPath + "/" + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\" + 1))));
-            file.transferTo(varFile);
-            FileBody fileBody = new FileBody(varFile);
+//            String uploadPath = UPLOAD_DIR+ "/faceRecog";
+//            File varFile = new File(uploadPath);
+//
+//            if(!varFile.exists()) {
+//                varFile.mkdirs();
+//            }
+//
+//            varFile = new File((uploadPath + "/" + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\" + 1))));
+//            file.transferTo(varFile);
+//            FileBody fileBody = new FileBody(varFile);
+    
+            File file = new File ("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/girl.jpg");
+            FileBody fileBody = new FileBody(file);
             
             /* Multipart 등록 */
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
             builder.addPart("apiId", new StringBody(API_ID, ContentType.MULTIPART_FORM_DATA));
             builder.addPart("apiKey", new StringBody(API_KEY, ContentType.MULTIPART_FORM_DATA));
-            builder.addPart("dbId", new StringBody(dbId, ContentType.TEXT_PLAIN.withCharset("UTF-8")));
+            builder.addPart("dbId", new StringBody(dbId, ContentType.MULTIPART_FORM_DATA));
             builder.addPart("file", fileBody);
             HttpEntity entity = builder.build();
             post.setEntity(entity);
@@ -252,8 +261,8 @@ public class FaceRecog_Service {
             /* 정상 수신 응답 */
             String result = EntityUtils.toString(response.getEntity(), "UTF-8");
             if (responseCode == 200) {
-                log.info("# EngineApiService.recogFace >> succ >> result >> {}", result);
-                varFile.delete();
+                log.info("# EngineApiService.recogFace >> succ >> result >> {}", "너무 길어서 안찍음");
+//                varFile.delete();
                 return result;
             }
             /* 에러 응답 수신 */
@@ -262,7 +271,7 @@ public class FaceRecog_Service {
                 
                 System.out.println("Response Result : " + result.replace('+', ' '));
                 System.out.println("API 호출 에러 발생 : 에러코드 = " + responseCode);
-                varFile.delete();
+//                varFile.delete();
                 return "{ \"status\": \"error\" }";
             }
         } catch (Exception e) {

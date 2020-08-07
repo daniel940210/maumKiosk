@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,9 +30,12 @@ import java.util.Objects;
 public class FaceTracking_Service {
     final String API_SERVER = "https://api.maum.ai";
     
-    @Value("${upload.dir}") String UPLOAD_DIR;
-    @Value("${api.id}") String API_ID;
-    @Value("${api.key}") String API_KEY;
+//    @Value("${upload.dir}") String UPLOAD_DIR;
+//    @Value("${api.id}") String API_ID;
+//    @Value("${api.key}") String API_KEY;
+    String UPLOAD_DIR = "c:/upload";
+    String API_ID = "swhange91d6f0f28ab";
+    String API_KEY = "78ab9ae227d149539d96ed553ae448a4";
     
     public String getApiFaceTracking(MultipartFile file) {
         Map<Integer, ResponseEntity> map = new HashMap<>();
@@ -41,21 +47,29 @@ public class FaceTracking_Service {
             HttpPost post = new HttpPost(url);
             
             /* 이미지 데이타를 Multipart로 등록하기 위한 준비 */
-            String uploadPath = UPLOAD_DIR + "/faceTracking";
-            File varFile = new File(uploadPath);
+//            String uploadPath = UPLOAD_DIR + "/faceTracking";
+//            File varFile = new File(uploadPath);
+//
+//            if(!varFile.exists()) {
+//                varFile.mkdirs();
+//            }
+//
+//            varFile = new File((uploadPath +"/"+ Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\") + 1)));
+//            file.transferTo(varFile);
+//            FileBody fileBody = new FileBody(varFile);
             
-            if(!varFile.exists()) {
-                varFile.mkdirs();
-            }
+//            File varFile = new File("src/main/resources/templates/video/temp.mp4");
+//            if (!file.isEmpty()) {
+//                file.transferTo(varFile);
+//            }
+//            FileBody fileBody = new FileBody(varFile);
             
-            varFile = new File((uploadPath + "/" + Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("\\") + 1)));
-            file.transferTo(varFile);
-            FileBody fileBody = new FileBody(varFile);
+            File vidFile = new File("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/temp.mp4");
     
             /* Multipart 등록 */
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-            builder.addPart("video", fileBody);
+            builder.addPart("video", new FileBody(vidFile));
             builder.addPart("apiId", new StringBody(API_ID, ContentType.MULTIPART_FORM_DATA));
             builder.addPart("apiKey", new StringBody(API_KEY, ContentType.MULTIPART_FORM_DATA));
     
@@ -70,13 +84,13 @@ public class FaceTracking_Service {
             
             if (responseCode == 200) {
                 log.info("# EngineApiService.getApiFaceTracking >> succ >> result >> {}", "너무 길어서 안 찍음");
-                varFile.delete();
+//                varFile.delete();
                 return result;
             }
             /* 에러 응답 수신 */
             else {
                 log.info("# EngineApiService.getApiFaceTRacking >> fail >> code = {} >> result >> {}", responseCode, result);
-                varFile.delete();
+//                varFile.delete();
                 return "{ \"status\": \"error\" }";
             }
             

@@ -6,6 +6,18 @@
     <meta charset="UTF-8"/>
     <title>Maum Kiosk</title>
     <link rel="stylesheet" th:href="@{/input_style.css}" />
+    <style>
+        input[target=_button] {
+            color: white;
+            padding: 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,7 +42,7 @@
         </div>
         <div id="conv">
             <div id="conv_text">
-                <a>Start your sign-in.</a>
+                <a>Welcome. Press "Proceed" to sign-in.</a>
             </div>
         </div>
         <div class="button" id="products">
@@ -38,8 +50,14 @@
                 <a class="selected" th:href="redirect">Proceed to Input</a>
             </div>
         </div>
+<!--        <form th:action="@{/submit}" method="post" enctype="multipart/form-data">-->
+<!--            <input type="file" th:id="submitFile" required />-->
+<!--            <input type="submit" class="button" target="_button" value="Submit" />-->
+<!--        </form>-->
     </div>
 </div>
+
+
 
 <div id="footer">
     <div id="date">

@@ -25,7 +25,7 @@ public class FaceRecog_Controller {
     @RequestMapping("/faceRecog/set")
     @ResponseBody
     public String setFace(@RequestParam("file") MultipartFile file, @RequestParam(value = "faceId") String faceId, @RequestParam(value = "dbId") String dbId) {
-        return service.setFace(file, faceId, dbId);
+        return service.setFace(faceId, dbId);
     }
     
     @RequestMapping("faceRecog/delete")
@@ -37,6 +37,6 @@ public class FaceRecog_Controller {
     @RequestMapping(value = "faceRecog/recog", produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String recogFace(@RequestParam("file") MultipartFile file, @RequestParam(value = "dbId") String dbId) {
-        return service.recogFace(file, dbId);
+        return service.recogFace(dbId);
     }
 }

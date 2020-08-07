@@ -38,6 +38,25 @@
             <!--    <video id="vid2" autoplay></video>-->
             <!--        <button id="btnStop">STOP RECORDING</button></p>-->
             <script>
+                // let worker = new Worker("worker.js");
+                // worker.onmessage = function (event) {
+                //     let message = event.data;
+                //     if (message.type === "ready") {
+                //         outputElement.textContent = "Loaded";
+                //         worker.postMessage({
+                //             type: 'command',
+                //             arguments: ['-help']
+                //         })
+                //     } else if (message.type === "stdout") {
+                //         outputElement.textContent += message.data + "\n";
+                //     } else if (message.type === "start") {
+                //         outputElement.textContent = "Worker has received command\n";
+                //     }
+                // };
+                // const { createFFmpeg } = FFmpeg;
+                // const ffmpeg = createFFmpeg({
+                //     log: true,
+                // });
                 let constraintObj = {
                     audio: false,
                     video: {
@@ -96,19 +115,23 @@
                         // let stop = document.getElementById('btnStop');
                         let vidBase64 = document.getElementById('vidBase64');
                         let ftResult = document.getElementById('ftResult');
-                        let mediaRecorder = new MediaRecorder(mediaStreamObj);
+                        let options = {mimeType: 'video/webm;codecs=h264'};
+                        let mediaRecorder = new MediaRecorder(mediaStreamObj, options);
                         let chunks = [];
+                        let elem = document.getElementById("myBar");
+                        let uploadedVid = document.getElementById('uploadedVid');
 
                         start.addEventListener('click', (ev)=>{
+                            start.disabled;
                             mediaRecorder.start();
                             console.log(mediaRecorder.state);
                             let i = 0;
                             function move() {
                                 if (i === 0) {
                                     i = 1;
-                                    let elem = document.getElementById("myBar");
+
                                     let width = 1;
-                                    let id = setInterval(frame, 40);
+                                    let id = setInterval(frame, 45);
                                     function frame() {
                                         if (width >= 100) {
                                             clearInterval(id);
@@ -124,44 +147,55 @@
                             setTimeout(function(){mediaRecorder.stop();},5000);
                             console.log(mediaRecorder.state);
                         })
-                        // stop.addEventListener('click', (ev)=>{
-                        //     mediaRecorder.stop();
-                        //     console.log(mediaRecorder.state);
-                        // });
                         mediaRecorder.ondataavailable = function(ev) {
                             chunks.push(ev.data);
                         }
                         mediaRecorder.onstop = (ev)=>{
-                            let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+                            let blob = new Blob(chunks, { 'type' : 'video/webm;' });
+                            // transcode(blob);
                             chunks = [];
                             let reader = new window.FileReader();
                             reader.readAsDataURL(blob);
                             reader.onloadend = function () {
                                 vidBase64.value = reader.result;
-                                alert("Capture complete! Press Proceed");
+                                elem.innerHTML = 'Capture complete!';
                             }
-                            let fd = new FormData();
-                            // let file = new File([blob], 'recording');
-                            // let file = document.getElementById('file').files[0];
-                            fd.append('video', blob);
-                            fd.append('apiId', 'swhange91d6f0f28ab');
-                            fd.append('apiKey', '78ab9ae227d149539d96ed553ae448a4');
 
-                            let request = new XMLHttpRequest();
-                            request.open("POST", "https://api.maum.ai/Vca/faceTracking");
-                            request.setRequestHeader("Content-Type", "multipart/form-data");
-                            request.onload = function() {
-                                if (request.status === 200) {
-                                    console.log('Success!');
-                                } else {
-                                    console.log('Failed with status code ' + request.status);
-                                }
-                            }
-                            request.send(fd);
-                            request.onloadend = function () {
-                                ftResult.value = request.responseText;
-                                // alert(this.response);
-                            }
+                            // const transcode = async (webcamData) => {
+                            //     const name = 'record.webm';
+                            //     elem.innerHTML = 'Loading ffmpeg-core.js';
+                            //     await ffmpeg.load();
+                            //     elem.innerHTML = 'Start transcoding';
+                            //     await ffmpeg.write(name, webcamData);
+                            //     await ffmpeg.transcode(name,  'output.mp4');
+                            //     elem.innerHTML = 'Complete transcoding';
+                            //     const data = ffmpeg.read('output.mp4');
+                            //     blob = new Blob([data.buffer], { type: 'video/mp4' });
+                            // }
+
+                            // let fd = new FormData();
+                            // // let file = new File([blob], 'recording');
+                            // let file = uploadedVid.files[0];
+                            // fd.append('video', file);
+                            // fd.append('apiId', 'swhange91d6f0f28ab');
+                            // fd.append('apiKey', '78ab9ae227d149539d96ed553ae448a4');
+                            //
+                            // let request = new XMLHttpRequest();
+                            // request.open("POST", "https://api.maum.ai/Vca/faceTracking");
+                            // request.setRequestHeader("Content-Type", "multipart/form-data");
+                            // request.onload = function() {
+                            //     if (request.status === 200) {
+                            //         console.log('Success!');
+                            //     } else {
+                            //         console.log('Failed with status code ' + request.status);
+                            //     }
+                            // }
+                            // request.send(fd);
+                            // request.onloadend = function () {
+                            //     elem.innerHTML = 'Conversion Complete';
+                            //     ftResult.value = request.responseText;
+                            //     alert(this.response);
+                            // }
                         }
                     })
                     .catch(function(err) {
@@ -180,7 +214,6 @@
                  TypeError - audio: false, video: false
                  *********************************/
             </script>
-
         </main>
     </div>
     <div id="button_row">
@@ -198,21 +231,16 @@
             </div>
 <!--            <form enctype="multipart/form-data" method="post" name="fileinfo">
                 <input type="file" id="file" required />
-                <input type="submit" value="Submit video" />
+                <input type="submit" id="submitFile" value="Submit video" />
             </form>-->
         </div>
 
         <form th:action="@{/input/save}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:id="vidBase64" name="vidBase64" value="None" />
-<!--            <input type="hidden" th:id="ftRequest" name="ftRequest" value="None" />-->
+            <input type="hidden" th:id="ftRequest" name="ftRequest" value="None" />
+<!--            <input type="file" th:id="uploadedVid" name="uploadedVid" />-->
             <input type="submit" class="button" id="products" target="_button" value="Submit" />
         </form>
-
-<!--        <div class="button" id="products">
-            <div id="products_text">
-                <a class="selected" th:href="redirectF">Proceed to Result</a>
-            </div>
-        </div>-->
     </div>
 </div>
 

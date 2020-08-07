@@ -1,18 +1,20 @@
 package com.mindslab.toronto.maumKiosk.controllers;
 
-import com.mindslab.toronto.maumKiosk.commons.Base64ToFile_Service;
+import com.mindslab.toronto.maumKiosk.commons.*;
 import com.mindslab.toronto.maumKiosk.runner.api_engine.faceTracking.FaceTracking_Service;
-import com.mindslab.toronto.maumKiosk.commons.FTtoImageSrc_Service;
-import com.mindslab.toronto.maumKiosk.commons.FTtoFR_Service;
 import com.mindslab.toronto.maumKiosk.runner.api_engine.face_recog.FaceRecog_Service;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.awt.*;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -33,27 +35,38 @@ public class ResultController {
     @Autowired
     private FaceRecog_Service frService;
     //     Input: MultipartFile (image)
-    //     Output: String (in
+    //     Output: String (in JSON response format)
     
     @Autowired
     private FTtoImageSrc_Service ftToImageSrc;
     //     Input: String (of Face Tracking response, in JSON format)
     //     Output: String (base64-encoded src of first-tracked face image)
     
+    @Autowired
+    private ImageSrcToFR_Service imageSrcToFR;
+    //     Input: String (base64-encoded src of image from Face Tracking response)
+    //     Output: Void (Image file saved locally)
+    
     @RequestMapping("/")
-    public String footerInfo (@ModelAttribute("video") String videoSrc, @ModelAttribute("ftResult") String ftResultJSON, Model model) throws UnsupportedEncodingException {
-//        System.out.println(ftResultJSON);
+    public String footerInfo (@ModelAttribute("uploadedVid") MultipartFile uploadedVid, @ModelAttribute("video") String videoSrc, Model model) throws IOException {
         System.out.println("Capture sent to Face Tracking API...");
-        System.out.println(videoSrc);
+        String ftResult = ftService.getApiFaceTracking(uploadedVid);
+//        System.out.println(ftResult);
+        System.out.println("Face Tracking successful! Creating result image...");
+        String imageSrc = ftToImageSrc.convert(ftResult);
+        System.out.println("Image sent to Face Recognition API...");
+        imageSrcToFR.convert(imageSrc);
+        System.out.println("Face Recognition successful! Creating response...");
+        String frResult = frService.recogFace("maumKiosk");
+//        System.out.println(frResult);
+        JSONObject frJSON = new JSONObject(frResult);
+        if (frJSON.getJSONObject("result").getString("id").equals("__no__match__")) {
+            model.addAttribute("name", "New Visitor");
+        } else {
+            model.addAttribute("name", frJSON.getJSONObject("result").getString("id"));
+        }
         model.addAttribute("videoSrc", videoSrc);
-//        String imageSrc = "data:image/jpeg;base64, " + ftToImageSrc.convert(ftResultJSON);
-//        System.out.println(imageSrc);
-//        model.addAttribute("imageSrc", imageSrc);
-//        String ftResult = ftService.getApiFaceTracking(base64ToFile.convert(videoSrc));
-//        String imageSrc = fTtoImageSrc.convert(ftResult);
-//        System.out.println(imageSrc);
-        
-//        model.addAttribute("imageSrc", "data:image/jpeg;base64, " + imageSrc);
+        model.addAttribute("imageSrc", "data:image/jpeg;base64, " + imageSrc);
         model.addAttribute("datetime", new Date());
         return "view/result";
     }

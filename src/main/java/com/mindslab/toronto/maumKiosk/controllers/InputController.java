@@ -19,7 +19,8 @@ import java.util.Date;
 @RequestMapping("/input")
 public class InputController {
     @RequestMapping("/")
-    public String footerInfo (Model model) {
+    public String footerInfo (@ModelAttribute("uploadedVid") final MultipartFile uploadedVid, Model model) {
+        model.addAttribute("uploadedVid", uploadedVid);
         model.addAttribute("datetime", new Date());
         return "view/input";
     }
@@ -44,9 +45,10 @@ public class InputController {
     }*/
     
     @RequestMapping(value="/save", method=RequestMethod.POST)
-    public String redirect (@ModelAttribute("vidBase64") final String video, @ModelAttribute("ftResult") final String ftResult, RedirectAttributes redirectAttr) {
+    public String redirect (@ModelAttribute("uploadedVid") final MultipartFile uploadedVid, @ModelAttribute("vidBase64") final String video, @ModelAttribute("ftResult") final String ftResult, RedirectAttributes redirectAttr) {
         redirectAttr.addFlashAttribute("video", video);
         redirectAttr.addFlashAttribute("ftResult", ftResult);
+        redirectAttr.addFlashAttribute("uploadedVid", uploadedVid);
         /*System.out.println(video);*/
         return "redirect:/result/";
     }
