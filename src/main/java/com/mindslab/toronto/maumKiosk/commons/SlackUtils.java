@@ -10,25 +10,25 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.IOException;
 
 public class SlackUtils {
-    private static String slackWebhookUrl = "https://hooks.slack.com/services/TXXXXXXXX/BXXXXXXXX/XxxxXxxxXxxxXxxxXxxxXxxx";
-    
+    private static String slackWebhookUrl = "https://hooks.slack.com/services/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";
+
     public static void sendMessage(SlackMessage message) {
-//        CloseableHttpClient client = HttpClients.createDefault();
-//        HttpPost httpPost = new HttpPost(slackWebhookUrl);
-//
-//        try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            String json = objectMapper.writeValueAsString(message);
-//
-//            StringEntity entity = new StringEntity(json);
-//            httpPost.setEntity(entity);
-//            httpPost.setHeader("Accept", "application/json");
-//            httpPost.setHeader("Content-type", "application/json");
-//
-//            client.execute(httpPost);
-//            client.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(slackWebhookUrl);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(message);
+
+            StringEntity entity = new StringEntity(json);
+            httpPost.setEntity(entity);
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+
+            client.execute(httpPost);
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

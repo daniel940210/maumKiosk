@@ -161,18 +161,6 @@
                                 elem.innerHTML = 'Capture complete!';
                             }
 
-                            // const transcode = async (webcamData) => {
-                            //     const name = 'record.webm';
-                            //     elem.innerHTML = 'Loading ffmpeg-core.js';
-                            //     await ffmpeg.load();
-                            //     elem.innerHTML = 'Start transcoding';
-                            //     await ffmpeg.write(name, webcamData);
-                            //     await ffmpeg.transcode(name,  'output.mp4');
-                            //     elem.innerHTML = 'Complete transcoding';
-                            //     const data = ffmpeg.read('output.mp4');
-                            //     blob = new Blob([data.buffer], { type: 'video/mp4' });
-                            // }
-
                             // let fd = new FormData();
                             // // let file = new File([blob], 'recording');
                             // let file = uploadedVid.files[0];
@@ -229,10 +217,17 @@
             <div id="myProgress">
                 <div id="myBar">Loading...</div>
             </div>
-<!--            <form enctype="multipart/form-data" method="post" name="fileinfo">
-                <input type="file" id="file" required />
-                <input type="submit" id="submitFile" value="Submit video" />
-            </form>-->
+            <script>
+                document.addEventListener('click', musicPlay);
+                function musicPlay() {
+                    document.getElementById('player').play();
+                    document.removeEventListener('click', musicPlay);
+                }
+            </script>
+            <audio id="player" controls autoplay hidden>
+                <source th:src="${voiceSrc}">
+                unsupported !!
+            </audio>
         </div>
 
         <form th:action="@{/input/save}" method="post" enctype="multipart/form-data">

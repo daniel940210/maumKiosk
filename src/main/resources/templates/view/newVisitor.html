@@ -6,6 +6,18 @@
     <meta charset="UTF-8"/>
     <title>Maum Kiosk</title>
     <link rel="stylesheet" th:href="@{/input_style.css}" />
+    <style>
+        input[target=_button] {
+            color: white;
+            padding: 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,38 +28,29 @@
     </div>
 </div>
 
-<!--<script>-->
-<!--    let name = document.getElementById('message');-->
-<!--    let line = document.getElementById('optionalLine');-->
-
-<!--    if (name.innerHTML === 'Welcome, New Visitor') {-->
-<!--        line.style.visibility = 'visible';-->
-<!--    } else {-->
-<!--        line.style.visibility = 'hidden';-->
-<!--    }-->
-<!--</script>-->
-
 <div id="content">
     <div id="container">
         <div id="img">
-<!--            <video th:src="${videoSrc}" width="1075" height="605" loop autoplay></video>-->
-            <img th:src="${imageSrc}" width="1075" height="605" alt="Face recognition failed">
+            <img th:src="@{/maum.ai_web.png}" width="1075" height="605" alt="landing"/>
         </div>
     </div>
     <div id="button_row">
         <div class="button" id="choose">
             <div id="choose_text">
-                <a class="selected" th:href="redirectB">Back to Input</a>
+                <a class="selected" href="http://maum.ai/serviceLanding/enCloudApiMain">Cloud API by maum.ai</a>
             </div>
         </div>
         <div id="conv">
             <div id="conv_text">
-                <a th:text="${isRecognized} ? 'Welcome, ' + ${name} + '. Notified to Slack.' : 'Welcome, new visitor.'" id="message"></a>
-                <form  id="optionalLine" th:action="@{/result/newVisitor}" method="post" enctype="multipart/form-data">
-                    <input th:type="${isRecognized} ? hidden : text" id="newVisitorName" th:name="newVisitorName" alt="New Visitor" placeholder="Enter your name."/>
-                    <input th:type="${isRecognized} ? hidden : submit" value="submit" />
-                </form>
+                <a th:utext="${successMessage} ? 'Visitor Name: ' + ${name} + '<br />' + 'Visitor Message: ' + ${message} + '<br />' + 'Message sent to Slack!'"></a>
+<!--                <a th:text="${successMessage} ? 'Visitor Message: ' + ${message}"></a>-->
+<!--                <a th:text="${successMessage} ? 'Message sent to Slack!'"></a>-->
             </div>
+            <form  id="optionalLine" th:action="@{/newVisitor/slackMessage}" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:name="name" th:value="${name}"/>
+                <input th:type="${textBoxVisible} ? text : hidden" id="newVisitorName" th:name="message" alt="New Visitor" placeholder="Enter the reason for your visit."/>
+                <input th:type="${textBoxVisible} ? submit : hidden" value="Send Message" />
+            </form>
             <script>
                 document.addEventListener('click', musicPlay);
                 function musicPlay() {
@@ -62,11 +65,13 @@
         </div>
         <div class="button" id="products">
             <div id="products_text">
-                <a class="selected" th:href="redirectF">Return to Welcome</a>
+                <a class="selected" th:href="redirectB">Return to Welcome</a>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <div id="footer">
     <div id="date">

@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 @Slf4j
@@ -25,10 +26,10 @@ import java.io.InputStream;
 public class TTS_Service {
     final String API_SERVER = "https://api.maum.ai";
     
-    @Value("${api.id}") String API_ID;
-    @Value("${api.key}") String API_KEY;
+    String API_ID = "swhange91d6f0f28ab";
+    String API_KEY = "78ab9ae227d149539d96ed553ae448a4";
     
-    public ResponseEntity<byte[]> getApiTts (String text, String voiceName) {
+    public byte[] getApiTts (String text, String voiceName) {
         try {
             String url = API_SERVER + "/tts/stream";
             
@@ -52,25 +53,23 @@ public class TTS_Service {
             log.info("Response Code : " + response.getEntity());
             
             HttpHeaders headers = new HttpHeaders();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             /* 정상 응답 수신 */
             if (responseCode == 200) {
-                HttpEntity responseEntity = response.getEntity();
-                
-                InputStream in = responseEntity.getContent();
-                byte[] imageArray = IOUtils.toByteArray(in);
-    
-                return new ResponseEntity<>(imageArray, headers, HttpStatus.OK);
+                response.getEntity().writeTo(baos);
+                return baos.toByteArray();
+//                return new ResponseEntity<>(imageArray, headers, HttpStatus.OK);
             }
             /* 에러 응답 수신 */
             else {
                 log.info("# EngineApiService.getApiTts >> fail >> code = {} >> result >> {}", responseCode, EntityUtils.toString(response.getEntity(), "UTF-8"));
+//                return null;
                 return null;
             }
         } catch (Exception e) {
             log.info("# EngineApiService.getApiTts >> fail >> exception >> {}", e.getMessage());
             e.printStackTrace();
         }
-        
         return null;
     }
 }

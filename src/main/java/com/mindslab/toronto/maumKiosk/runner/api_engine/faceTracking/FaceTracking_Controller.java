@@ -19,6 +19,6 @@ public class FaceTracking_Controller {
     @RequestMapping(value = "/faceTracking")
     @ResponseBody
     public String getApiFaceTracking(@RequestParam MultipartFile file) {
-        return service.getApiFaceTracking(file);
+        return service.getApiFaceTracking();
     }
 }

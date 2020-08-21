@@ -37,7 +37,7 @@ public class FaceTracking_Service {
     String API_ID = "swhange91d6f0f28ab";
     String API_KEY = "78ab9ae227d149539d96ed553ae448a4";
     
-    public String getApiFaceTracking(MultipartFile file) {
+    public String getApiFaceTracking() {
         Map<Integer, ResponseEntity> map = new HashMap<>();
         
         try {
@@ -48,6 +48,7 @@ public class FaceTracking_Service {
             
             /* 이미지 데이타를 Multipart로 등록하기 위한 준비 */
 //            String uploadPath = UPLOAD_DIR + "/faceTracking";
+
 //            File varFile = new File(uploadPath);
 //
 //            if(!varFile.exists()) {
@@ -64,7 +65,7 @@ public class FaceTracking_Service {
 //            }
 //            FileBody fileBody = new FileBody(varFile);
             
-            File vidFile = new File("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/temp.mp4");
+            File vidFile = new File("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/captured.mp4");
     
             /* Multipart 등록 */
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();

@@ -18,7 +18,7 @@ public class TTS_Controller {
     
     @RequestMapping("/tts")
     @ResponseBody
-    public ResponseEntity<byte[]> getApiTts(@RequestParam(value = "text") String text,
+    public byte[] getApiTts(@RequestParam(value = "text") String text,
                                             @RequestParam(value = "voicename") String voiceName) {
         return service.getApiTts(text, voiceName);
     }

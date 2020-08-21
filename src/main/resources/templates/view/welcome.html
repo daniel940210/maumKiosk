@@ -43,6 +43,18 @@
         <div id="conv">
             <div id="conv_text">
                 <a>Welcome. Press "Proceed" to sign-in.</a>
+<!--                <iframe th:src="@{/silence.mp3}" allow="autoplay" id="audio" hidden></iframe>-->
+                <script>
+                    document.addEventListener('click', musicPlay);
+                    function musicPlay() {
+                        document.getElementById('player').play();
+                        document.removeEventListener('click', musicPlay);
+                    }
+                </script>
+                <audio id="player" controls autoplay hidden>
+                    <source th:src="${voiceSrc}">
+                    unsupported !!
+                </audio>
             </div>
         </div>
         <div class="button" id="products">
