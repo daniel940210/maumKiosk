@@ -62,7 +62,7 @@ public class ResultController {
     public String footerInfo (@ModelAttribute("uploadedVid") MultipartFile uploadedVid, @ModelAttribute("videoSrc") String videoSrc, Model model) throws IOException {
 //        System.out.println(videoSrc);
 //        System.out.println("Converting video into appropriate format...");
-        base64ToFile.convert(videoSrc);
+//        base64ToFile.convert(videoSrc);
         System.out.println("Capture sent to Face Tracking API...");
         String ftResult = ftService.getApiFaceTracking();
 //        System.out.println(ftResult);

@@ -99,7 +99,7 @@ public class FaceRecog_Service {
 //            file.transferTo(varFile);
 //            FileBody fileBody = new FileBody(varFile);
             
-            File file = new File ("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/tracked.jpg");
+            File file = new File ("./src/main/resources/templates/video/tracked.jpg");
             FileBody fileBody = new FileBody(file);
             
             /* Multipart 등록 */
@@ -240,7 +240,7 @@ public class FaceRecog_Service {
 //            file.transferTo(varFile);
 //            FileBody fileBody = new FileBody(varFile);
     
-            File file = new File ("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/tracked.jpg");
+            File file = new File ("./src/main/resources/templates/video/tracked.jpg");
             FileBody fileBody = new FileBody(file);
             
             /* Multipart 등록 */

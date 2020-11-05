@@ -18,7 +18,7 @@ public class ImageSrcToFR_Service {
     public void convert (String imageSrc) throws IOException {
         InputStream stream = new ByteArrayInputStream(Base64.getDecoder().decode(imageSrc.getBytes()));
         BufferedImage image = ImageIO.read(stream);
-        File file = new File("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/tracked.jpg");
+        File file = new File("./src/main/resources/templates/video/tracked.jpg");
         try {
             File dir = new File(file.getParentFile(), file.getName());
             ImageIO.write(image, "jpg", dir);

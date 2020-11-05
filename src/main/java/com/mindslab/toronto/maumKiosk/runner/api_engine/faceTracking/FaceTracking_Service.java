@@ -65,7 +65,7 @@ public class FaceTracking_Service {
 //            }
 //            FileBody fileBody = new FileBody(varFile);
             
-            File vidFile = new File("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/captured.mp4");
+            File vidFile = new File("./src/main/resources/templates/video/captured.mp4");
     
             /* Multipart 등록 */
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();

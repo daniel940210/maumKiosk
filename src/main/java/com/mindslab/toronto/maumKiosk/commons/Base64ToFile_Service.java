@@ -1,11 +1,5 @@
 package com.mindslab.toronto.maumKiosk.commons;
 
-import com.xuggle.mediatool.IMediaReader;
-import com.xuggle.mediatool.IMediaViewer;
-import com.xuggle.mediatool.IMediaWriter;
-import com.xuggle.mediatool.ToolFactory;
-import com.xuggle.xuggler.IAudioResampler;
-import com.xuggle.xuggler.ICodec;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
@@ -25,7 +19,7 @@ public class Base64ToFile_Service {
         String data = base64.split("base64,")[1];
         byte[] decoded = Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8));
         try {
-            FileOutputStream out = new FileOutputStream("C:/Users/Daniel Whang/Desktop/maumKiosk/src/main/resources/templates/video/captured.webm");
+            FileOutputStream out = new FileOutputStream("video/captured.webm");
             out.write(decoded);
             out.close();
         } catch (Exception e) {
