@@ -26,7 +26,6 @@ public class WelcomeController {
     @RequestMapping("/")
     public String footerInfo (Model model) {
         String voiceSrc = "data:audio/wav;base64, " + Base64.getEncoder().encodeToString(tts_service.getApiTts("Welcome. Press Proceed to sign-in.", "baseline_eng"));
-//        System.out.println(voiceSrc);
         model.addAttribute("voiceSrc", voiceSrc);
         model.addAttribute("datetime", new Date());
         return "view/welcome";
@@ -35,10 +34,4 @@ public class WelcomeController {
     public RedirectView redirectView () {
         return new RedirectView("/input/");
     }
-    
-//    @RequestMapping(value="/submit", method= RequestMethod.POST)
-//    public String redirect (@ModelAttribute("submitFile") final MultipartFile file, RedirectAttributes redirectAttr) {
-//        redirectAttr.addFlashAttribute("uploadedVid", file);
-//        return "redirect:/input/";
-//    }
 }

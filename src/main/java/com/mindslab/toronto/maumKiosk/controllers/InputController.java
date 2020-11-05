@@ -28,7 +28,6 @@ public class InputController {
     public String footerInfo (@ModelAttribute("uploadedVid") final MultipartFile uploadedVid, Model model) {
         String voiceSrc = "data:audio/wav;base64, " + Base64.getEncoder().encodeToString(tts_service.getApiTts("Press record your face to capture your face for face recognition." +
                                                                                                                    "When complete, press submit to start the sign-in process.", "baseline_eng"));
-//        System.out.println(voiceSrc);
         model.addAttribute("voiceSrc", voiceSrc);
         model.addAttribute("uploadedVid", uploadedVid);
         model.addAttribute("datetime", new Date());
@@ -38,28 +37,10 @@ public class InputController {
     public RedirectView toWelcome () {
         return new RedirectView("/");
     }
-/*    @GetMapping("/")
-    public String inputForm(Model model) {
-        model.addAttribute("vidInput", new VidInput());
-        return "view/input";
-    }*/
-/*    @PostMapping("/result/")
-    public String toResult (@ModelAttribute VidInput vidInput, Model model) {
-        model.addAttribute("vidInput", vidInput);
-        return "view/result";
-    }*/
-    
-/*    @RequestMapping("/redirectF")
-    public RedirectView toResult () {
-        return new RedirectView("/result/");
-    }*/
     
     @RequestMapping(value="/save", method=RequestMethod.POST)
-    public String redirect (@ModelAttribute("uploadedVid") final MultipartFile uploadedVid, @ModelAttribute("vidBase64") final String videoSrc, @ModelAttribute("ftResult") final String ftResult, RedirectAttributes redirectAttr) {
+    public String redirect (@ModelAttribute("vidBase64") final String videoSrc, @ModelAttribute("ftResult") final String ftResult, RedirectAttributes redirectAttr) {
         redirectAttr.addFlashAttribute("videoSrc", videoSrc);
-        redirectAttr.addFlashAttribute("ftResult", ftResult);
-        redirectAttr.addFlashAttribute("uploadedVid", uploadedVid);
-        /*System.out.println(video);*/
         return "redirect:/result/";
     }
 }

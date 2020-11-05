@@ -59,29 +59,39 @@ public class ResultController {
     private TTS_Service tts_service;
     
     @RequestMapping("/")
-    public String footerInfo (@ModelAttribute("uploadedVid") MultipartFile uploadedVid, @ModelAttribute("videoSrc") String videoSrc, Model model) throws IOException {
+    public String footerInfo (@ModelAttribute("videoSrc") String videoSrc, Model model) throws IOException {
 //        System.out.println(videoSrc);
 //        System.out.println("Converting video into appropriate format...");
 //        base64ToFile.convert(videoSrc);
+
+        // 현재 JavaScript에서는 mp4 형식의 비디오를 캡쳐하는 기능을 서포트 하지 않기때문에,
+        // 일단 따로 캡쳐한 mp4 영상을 가져와서 face tracking에 보내준다.
         System.out.println("Capture sent to Face Tracking API...");
         String ftResult = ftService.getApiFaceTracking();
-//        System.out.println(ftResult);
+
+        // Face tracking이 성공적일시 응답문에 첨부된 image data URI를 추출해온다.
         System.out.println("Face Tracking successful! Creating result image...");
         String imageSrc = ftToImageSrc.convert(ftResult);
+
+        // 추출한 image data URI를 jpg 파일로 저장한다.
         System.out.println("Image sent to Face Recognition API...");
         imageSrcToFR.convert(imageSrc);
+
+        // 저장한 jpg 파일을 face recognition에 전송한다.
         System.out.println("Face Recognition successful! Creating response...");
         String frResult = frService.recogFace("maumKiosk");
-//        System.out.println(frResult);
         JSONObject frJSON = new JSONObject(frResult);
         String userName;
         boolean isRecognized;
         String voiceSrc;
+
+        // 얼굴인식 실패시, 신규 방문자 절차로 넘어간다. (방문자 이름, 방문 이유 기입 유도)
         if (frJSON.getJSONObject("result").getString("id").equals("__no__match__")) {
             userName = "New Visitor";
             isRecognized = false;
             voiceSrc = "data:audio/wav;base64, " + Base64.getEncoder().encodeToString(tts_service.getApiTts("Welcome, new visitor. Please type in your name, and then press submit.", "baseline_eng"));
         } else {
+            // 얼굴인식 성공시, 슬랙으로 방문자 Face ID와 함께 메세지를 보낸다.
             userName = frJSON.getJSONObject("result").getString("id");
             isRecognized = true;
             slack_service.knownUser(userName);

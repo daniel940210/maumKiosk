@@ -112,14 +112,11 @@
 
                         //add listeners for saving video/audio
                         let start = document.getElementById('btnStart');
-                        // let stop = document.getElementById('btnStop');
                         let vidBase64 = document.getElementById('vidBase64');
-                        let ftResult = document.getElementById('ftResult');
                         let options = {mimeType: 'video/webm;codecs=h264'};
                         let mediaRecorder = new MediaRecorder(mediaStreamObj, options);
                         let chunks = [];
                         let elem = document.getElementById("myBar");
-                        let uploadedVid = document.getElementById('uploadedVid');
 
                         start.addEventListener('click', (ev)=>{
                             start.disabled;
@@ -152,7 +149,6 @@
                         }
                         mediaRecorder.onstop = (ev)=>{
                             let blob = new Blob(chunks, { 'type' : 'video/webm;' });
-                            // transcode(blob);
                             chunks = [];
                             let reader = new window.FileReader();
                             reader.readAsDataURL(blob);
@@ -232,8 +228,6 @@
 
         <form th:action="@{/input/save}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:id="vidBase64" name="vidBase64" value="None" />
-            <input type="hidden" th:id="ftRequest" name="ftRequest" value="None" />
-<!--            <input type="file" th:id="uploadedVid" name="uploadedVid" />-->
             <input type="submit" class="button" id="products" target="_button" value="Submit" />
         </form>
     </div>
