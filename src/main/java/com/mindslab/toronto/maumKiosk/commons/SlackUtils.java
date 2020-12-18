@@ -10,7 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.IOException;
 
 public class SlackUtils {
-    private static String slackWebhookUrl = "https://hooks.slack.com/services/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";
+    private static String slackWebhookUrl = "https://hooks.slack.com/services/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";
 
     public static void sendMessage(SlackMessage message) {
         CloseableHttpClient client = HttpClients.createDefault();
